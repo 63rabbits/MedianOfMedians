@@ -1,7 +1,7 @@
 # MedianOfMedians
 
 This is an algorithm for obtaining an approximate median m.  
-Roughly, **the median m is located at the 30th to 70th percentile.**
+Roughly, **the median m is located at the 30th to 70th percentile.**  
 **Caution: Sometimes I make a mistake.**.  
 For example, in the case of 100 data, a value between 30th and 70th is selected as the median.  
 This algorithm is used as the basic idea of **QuickSelect**.  
