@@ -105,8 +105,8 @@ void test() {
                     for (int j=0; j<numElement; j++) {
                         array[j] = rand()%100;
                         if (j == beginOfPartial) printf("      ");
-                        if (j == endOfPartial) printf("      ");
                         printf("%02d, ", array[j]);
+                        if (j == endOfPartial) printf("      ");
                     }
                     printf("\n");
                     
@@ -124,7 +124,6 @@ void test() {
                     printf("sort and median(*) : ");
                     for (int j=0; j<numElement; j++) {
                         if (j == beginOfPartial) printf("      ");
-                        if (j == endOfPartial) printf("      ");
                         if ((j >= beginOfPartial) &&
                             (j <= endOfPartial) &&
                             (array[j] == median)) {
@@ -133,6 +132,7 @@ void test() {
                         else {
                             printf("%02d, ", array[j]);
                         }
+                        if (j == endOfPartial) printf("      ");
                     }
                     printf("\n");
                     printf("\n");
