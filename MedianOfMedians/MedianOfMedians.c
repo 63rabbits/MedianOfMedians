@@ -8,6 +8,7 @@
 #include "MedianOfMedians.h"
 
 //////////////////////////////////////////////////
+int medianOfMediansSlave(int *array, int sizeGroup, int leftIndex, int rightIndex);
 int medianMOM(int *array, int leftIndex, int rightIndexI);
 bool swapMOM(int *array, int indexA, int indexB);
 
@@ -66,18 +67,7 @@ int medianOfMedians(int *array, int length, int sizeGroup, int leftIndex, int ri
         return median;
     }
     
-    int storeIndex = leftIndex;
-    for (int i=leftIndex; i<=rightIndex; i+=sizeGroup) {
-        int subRightIndex = i + sizeGroup - 1;
-        if (rightIndex < subRightIndex) {
-            subRightIndex = rightIndex;
-        }
-        int medianIndex = medianMOM(array, i, subRightIndex);
-        swapMOM(array, storeIndex, medianIndex);
-        storeIndex++;
-    }
-    int medianIndex = medianMOM(array, 0, storeIndex);
-    int median = array[medianIndex];
+    int median = medianOfMediansSlave(array, sizeGroup, leftIndex, rightIndex);
     
     // if select not-inplace process, delete work array.
     if ((MOM_OPTION_PLACE & option) == MOM_OPTION_NOT_INPLACE) {
@@ -89,6 +79,27 @@ int medianOfMedians(int *array, int length, int sizeGroup, int leftIndex, int ri
 
 //////////////////////////////////////////////////
 //  private
+int medianOfMediansSlave(int *array, int sizeGroup, int leftIndex, int rightIndex) {
+    if ((rightIndex - leftIndex) < sizeGroup) {
+        int medianIndex = medianMOM(array, leftIndex, rightIndex);
+        int median = array[medianIndex];
+        return median;
+    }
+
+    int storeIndex = leftIndex;
+    for (int i=leftIndex; i<=rightIndex; i+=sizeGroup) {
+        int subRightIndex = i + sizeGroup - 1;
+        if (rightIndex < subRightIndex) {
+            subRightIndex = rightIndex;
+        }
+        int medianIndex = medianMOM(array, i, subRightIndex);
+        swapMOM(array, storeIndex, medianIndex);
+        storeIndex++;
+    }
+
+    return medianOfMediansSlave(array, sizeGroup, leftIndex, storeIndex);
+}
+
 int medianMOM(int *array, int leftIndex, int rightIndex) {
     insertionSortSimple(&array[leftIndex], (rightIndex - leftIndex + 1), SORT_OPTION_NONE);
     return leftIndex + (rightIndex - leftIndex) / 2;
