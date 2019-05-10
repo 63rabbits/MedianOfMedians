@@ -97,7 +97,8 @@ int medianOfMediansSlave(int *array, int sizeGroup, int leftIndex, int rightInde
         storeIndex++;
     }
 
-    return medianOfMediansSlave(array, sizeGroup, leftIndex, storeIndex);
+    int m = medianMOM(array, leftIndex, storeIndex);
+    return array[m];
 }
 
 int medianMOM(int *array, int leftIndex, int rightIndex) {
