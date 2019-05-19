@@ -9,3 +9,5 @@ This algorithm is used as the basic idea of **QuickSelect**.
 おおよそとは**中央値mが30〜70パーセンタイルに位置する**ということである。  
 例えると100個のデータでは30番目〜70番目の間にある値を中央値として選択するということ。  
 このアルゴリズムは**QuickSelect**の基本的な考え方として使われる。
+
+![selection-0006](/selection-0006.jpg)
